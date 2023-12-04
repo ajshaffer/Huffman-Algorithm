@@ -20,9 +20,6 @@ with open('/Users/austinshaffer/Desktop/dataTeamX.txt', 'r') as f:
     contents = f.readlines()
 f.close()
 
-for line in contents:
-    print(line)
-
 char_weight = {}
 
 #Insert the character as the key and the weight as the value in a dictionary
@@ -30,3 +27,5 @@ for line in contents:
     char_weight[line[:1]] = line[2:6]
 
 print(char_weight)
+
+
