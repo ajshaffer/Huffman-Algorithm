@@ -6,6 +6,10 @@ Once the tree has been built, the program should: <br>
 
 References:
 * https://github.com/lapakota/huffman
+* https://www.geeksforgeeks.org/huffman-coding-using-priority-queue/
+* https://favtutor.com/blogs/huffman-coding
+* https://medium.com/@jayantparakh2003/huffman-encoding-a-guide-to-file-compression-algorithm-4fa1b2bfbc76
+
 
 
 
