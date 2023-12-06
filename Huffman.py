@@ -49,6 +49,8 @@ print("Frequency table:", freq_table)
 
 
 
-    
+
+
+
 
 
