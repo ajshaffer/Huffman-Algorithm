@@ -99,11 +99,74 @@ def read_data_from_file(filename):
             freq.append(weight)
     return data, freq
 
+
+def huffman_encoding(data, pq):
+    tree = generateTree(pq)
+
+    # Traverse the Huffman tree and assign codes
+    codes = {}
+
+    def assign_codes(node, code):
+        if node.char is not None:
+            codes[node.char] = code
+        else:
+            assign_codes(node.left, code + "0")
+            assign_codes(node.right, code + "1")
+
+    assign_codes(tree, "")
+
+    # Encode the data using the Huffman codes
+    encoded_data = "".join([codes[char] for char in data])
+
+    return encoded_data
+
+
+
+def huffman_decoding(encoded_data, tree):
+    decoded_data = ""
+    current_node = tree
+
+    for bit in encoded_data:
+        if bit == "0":
+            current_node = current_node.left
+        else:
+            current_node = current_node.right
+
+        if current_node.char is not None:
+            decoded_data += current_node.char
+            current_node = tree
+
+    return decoded_data
+
+
+
+
+def encode_or_decode():
+		choice = input("Enter 'encode' or 'decode': ").lower()
+
+		if choice == "encode":
+			data = input("Enter the string to encode: ").upper()
+			encoded_data = huffman_encoding(data)
+			print("Encoded data:", encoded_data)
+		elif choice == "decode":
+			encoded_data = input("Enter the encoded data: ")
+			decoded_data = huffman_decoding(encoded_data, tree)
+			print("Decoded data:", decoded_data)
+		else:
+			print("Invalid choice. Please enter 'encode' or 'decode'.")
+
+
+
+
 # Driver Code
 if __name__ == '__main__':
 	read_data_from_file(filename)
 	
 	size = len(data)
 
+	print("Huffman Codes:")
 	HuffmanCodes(data, freq, size)
+
+
+	
 
