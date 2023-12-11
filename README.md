@@ -9,6 +9,9 @@ References:
 * https://www.geeksforgeeks.org/huffman-coding-using-priority-queue/
 * https://favtutor.com/blogs/huffman-coding
 * https://medium.com/@jayantparakh2003/huffman-encoding-a-guide-to-file-compression-algorithm-4fa1b2bfbc76
+* https://www.youtube.com/watch?v=0kNXhFIEd_w&t=223s
+* https://www.youtube.com/watch?v=JCOph23TQTY
+* https://www.youtube.com/watch?v=21_bJLB7gyU&t=161s
 
 
 
