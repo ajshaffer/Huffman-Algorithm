@@ -11,7 +11,7 @@ class Node:
 
     def __lt__(self, other):
         return self.freq < other.freq
-
+    
 
 def build_huffman_tree(data):
     # Create a frequency table
@@ -19,6 +19,7 @@ def build_huffman_tree(data):
 
     # Create a heap of nodes
     nodes = [Node(char, freq) for char, freq in freq_table.items()]
+
     heapify(nodes)
 
     # Build the Huffman tree
@@ -40,12 +41,11 @@ def read_data_from_file(filename):
         for line in f:
             char, weight = line.split()
             data.append((char, float(weight)))
+
     return data
 
 
-def huffman_encoding(data):
-    tree = build_huffman_tree(data)
-
+def huffman_encoding(data, tree):
     # Traverse the Huffman tree and assign codes
     codes = {}
 
@@ -62,6 +62,7 @@ def huffman_encoding(data):
     encoded_data = "".join([codes[char] for char in data])
 
     return encoded_data
+
 
 
 def huffman_decoding(encoded_data, tree):
@@ -85,8 +86,8 @@ def encode_or_decode():
     choice = input("Enter 'encode' or 'decode': ").lower()
 
     if choice == "encode":
-        data = input("Enter the string to encode: ")
-        encoded_data = huffman_encoding(data)
+        data = input("Enter the string to encode: ").upper()
+        encoded_data = huffman_encoding(data, tree)
         print("Encoded data:", encoded_data)
     elif choice == "decode":
         encoded_data = input("Enter the encoded data: ")
