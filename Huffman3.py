@@ -14,17 +14,18 @@ class Node:
     
 
 def build_huffman_tree(data):
-    # Create a frequency table
+    # Create a frequency table by reading in the data from the external file
     freq_table = Counter(data)
 
     # Create a heap of nodes
     nodes = [Node(char, freq) for char, freq in freq_table.items()]
 
+    # Transform a populated list into a heap with heapify()
     heapify(nodes)
 
     # Build the Huffman tree
     while len(nodes) >= 2:
-        node1 = heappop(nodes)
+        node1 = heappop(nodes) # heappop() - Pop and return the smallest item from the heap, maintaining the heap invariant. If the heap is empty, IndexError is raised. To access the smallest item without popping it, use heap[0]
         node2 = heappop(nodes)
         new_node = Node(None, node1.freq + node2.freq)
         new_node.left = node1
@@ -46,7 +47,7 @@ def read_data_from_file(filename):
 
 
 def huffman_encoding(data, tree):
-    # Traverse the Huffman tree and assign codes
+    # Traverse the Huffman tree and assign the codes to each branch connecting the parent to the child 
     codes = {}
 
     def assign_codes(node, code):
@@ -62,7 +63,6 @@ def huffman_encoding(data, tree):
     encoded_data = "".join([codes[char] for char in data])
 
     return encoded_data
-
 
 
 def huffman_decoding(encoded_data, tree):
@@ -83,6 +83,7 @@ def huffman_decoding(encoded_data, tree):
 
 
 def encode_or_decode():
+    # Prompt the user on whether they want to encode/decode and what string for each
     choice = input("Enter 'encode' or 'decode': ").lower()
 
     if choice == "encode":
