@@ -25,8 +25,7 @@ def build_huffman_tree(data):
         new_node = Node(None, combined_freq)
         new_node.left = node1
         new_node.right = node2
-        nodes.append(new_node)
-        heapify(nodes)  # Re-heapify after adding the new combined node
+        heappush(nodes, new_node)  # Add merged node and re-heapify
 
     return nodes[0] if nodes else print("Error with building tree.")
 
