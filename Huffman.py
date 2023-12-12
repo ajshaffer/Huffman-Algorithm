@@ -14,38 +14,33 @@ class Node:
     
 
 def build_huffman_tree(data):
-    # Create a frequency table by reading in the data from the external file
-    freq_table = Counter(data)
-
-    # Create a heap of nodes
-    nodes = [Node(char, freq) for char, freq in freq_table.items()]
-
-    # Transform a populated list into a heap with heapify()
+    nodes = [Node(char, freq) for char, freq in data]
     heapify(nodes)
 
     # Build the Huffman tree
-    while len(nodes) >= 2:
-        node1 = heappop(nodes) # heappop() - Pop and return the smallest item from the heap, maintaining the heap invariant. If the heap is empty, IndexError is raised. To access the smallest item without popping it, use heap[0]
+    while len(nodes) > 1:
+        node1 = heappop(nodes)
         node2 = heappop(nodes)
-        new_node = Node(None, node1.freq + node2.freq)
+        combined_freq = node1.freq + node2.freq
+        new_node = Node(None, combined_freq)
         new_node.left = node1
         new_node.right = node2
-        heapify(nodes)
         nodes.append(new_node)
+        heapify(nodes)  # Re-heapify after adding the new combined node
 
-    return nodes[0]
+    return nodes[0] if nodes else print("Error with building tree.")
+
 
 def read_data_from_file(filename):
-    # Open the file and read character frequencies
     with open(filename, "r") as f:
         data = []
         for line in f:
-            char, weight = line.split()
-            data.append((char, float(weight)))
-
+            char, freq = line.split()
+            data.append((char, float(freq)))  # Create tuples of (char, freq)
     return data
 
 
+# Takes the data list from the .txt file and the tree constructed in the build_huffman_tree func
 def huffman_encoding(data, tree):
     # Traverse the Huffman tree and assign the codes to each branch connecting the parent to the child 
     codes = {}
@@ -100,7 +95,7 @@ def encode_or_decode():
 filename = "/Users/austinshaffer/Desktop/dataTeamX.txt"
 data = read_data_from_file(filename)
 
-chars = [char for char, freq in data]
+chars = [item for item in data]
 tree = build_huffman_tree(chars)
 
 encode_or_decode()
