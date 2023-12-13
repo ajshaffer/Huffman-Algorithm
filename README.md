@@ -8,7 +8,6 @@ References:
 * https://github.com/lapakota/huffman
 * https://www.geeksforgeeks.org/huffman-coding-using-priority-queue/
 * https://www.geeksforgeeks.org/huffman-decoding/
-* 
 * https://favtutor.com/blogs/huffman-coding
 * https://medium.com/@jayantparakh2003/huffman-encoding-a-guide-to-file-compression-algorithm-4fa1b2bfbc76
 * https://www.youtube.com/watch?v=0kNXhFIEd_w&t=223s
