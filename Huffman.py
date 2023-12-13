@@ -1,5 +1,5 @@
-from collections import Counter
-from heapq import heapify, heappop
+
+from heapq import heapify, heappop, heappush
 
 
 class Node:
@@ -14,6 +14,7 @@ class Node:
     
 
 def build_huffman_tree(data):
+    # Build each node based on the char and freq assigned within the list of tuples of var data
     nodes = [Node(char, freq) for char, freq in data]
     heapify(nodes)
 
@@ -27,6 +28,7 @@ def build_huffman_tree(data):
         new_node.right = node2
         heappush(nodes, new_node)  # Add merged node and re-heapify
 
+
     return nodes[0] if nodes else print("Error with building tree.")
 
 
@@ -35,7 +37,7 @@ def read_data_from_file(filename):
         data = []
         for line in f:
             char, freq = line.split()
-            data.append((char, float(freq)))  # Create tuples of (char, freq)
+            data.append((char, float(freq)))  # Append tuple of char, freq to list of var name data
     return data
 
 
@@ -54,11 +56,13 @@ def huffman_encoding(data, tree):
     assign_codes(tree, "")
 
     # Encode the data using the Huffman codes
-    encoded_data = "".join([codes[char] for char in data])
+    try:
+        encoded_data = "".join([codes[char] for char in data])
+        return encoded_data
+    except Exception as e:
+        print(f"Character {e} not found in tree.")
 
-    return encoded_data
-
-
+    
 def huffman_decoding(encoded_data, tree):
     decoded_data = ""
     current_node = tree
@@ -91,10 +95,23 @@ def encode_or_decode():
     else:
         print("Invalid choice. Please enter 'encode' or 'decode'.")
 
-filename = "/Users/austinshaffer/Desktop/dataTeamX.txt"
+filename = "/Users/austinshaffer/Desktop/dataTeamG.txt"
 data = read_data_from_file(filename)
 
 chars = [item for item in data]
 tree = build_huffman_tree(chars)
 
 encode_or_decode()
+
+
+
+'''
+    https://github.com/lapakota/huffman
+    https://www.geeksforgeeks.org/huffman-coding-using-priority-queue/
+    https://www.geeksforgeeks.org/huffman-decoding/
+    https://favtutor.com/blogs/huffman-coding
+    https://medium.com/@jayantparakh2003/huffman-encoding-a-guide-to-file-compression-algorithm-4fa1b2bfbc76
+    https://www.youtube.com/watch?v=0kNXhFIEd_w&t=223s
+    https://www.youtube.com/watch?v=JCOph23TQTY
+    https://www.youtube.com/watch?v=21_bJLB7gyU&t=161s
+'''
